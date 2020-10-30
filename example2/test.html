@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css.css">
+</head>
+
+<body onload="loadXMLDoc()">
+<br><br>
+
+ <div class="container" id="demo">
+
+ </div> 
+
+
+<script>
+function loadXMLDoc() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      myFunction(this);
+    }
+  };
+  xmlhttp.open("GET", "xml.xml", true);
+  xmlhttp.send();
+}
+function myFunction(xml) {
+  var i;
+  var xmlDoc = xml.responseXML;
+  var table=" <div class='row'><div class='gallery col-lg-12 col-md-12 col-sm-12 col-xs-12'><h1 class='gallery-title'>Gallery</h1></div><br/>";
+  var x = xmlDoc.getElementsByTagName("photo");   
+  for (i = 0; i <x.length; i++) { 
+
+
+    table += "</div>" +     "<div class='gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe'> <img src='"+x[i].getElementsByTagName("path")[0].childNodes[0].nodeValue+"' class='img-responsive'>" +
+       
+    "</div>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+</script>
+
+
+<script>
+function loadhome(name) {  
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      myFunctionhome(this, name);
+    }
+  };
+  xmlhttp.open("GET", "xml.xml", true);
+  xmlhttp.send();
+}
+function myFunctionhome(xml, name) { 
+  var n_name = name;	
+  var i;
+  var xmlDoc = xml.responseXML;
+  var table=" <div class='row'><div class='gallery col-lg-12 col-md-12 col-sm-12 col-xs-12'><h1 class='gallery-title'>Gallery</h1></div><br/>";
+  var x = xmlDoc.getElementsByTagName("photo");   
+
+
+
+
+  for (i = 0; i <x.length; i++) { 
+
+   if( n_name == x[i].getAttribute('category'))             {
+
+    table += "</div>" +     "<div class='gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe'> <img src='"+x[i].getElementsByTagName("path")[0].childNodes[0].nodeValue+"' class='img-responsive'>" + "</div>";
+
+                                                           }
+
+
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+</script>
+
+<div align="center">
+<button type="button" onclick="loadhome('family')">family</button>
+<button type="button" onclick="loadhome('children')">children</button>
+</div>
+</body>
+</html>
