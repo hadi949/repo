@@ -1,3 +1,8 @@
+.img-responsive {
+    width: 300px !important;
+}
+
+
 .gallery-title
 {
     font-size: 36px;
@@ -42,15 +47,10 @@
 
 .port-image
 {
-    width: 200px;
+    width: 100%;
 }
 
 .gallery_product
 {
     margin-bottom: 30px;
-}
-
-.img-responsive
-{
-    width: 200px;
 }
